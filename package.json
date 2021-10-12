@@ -1,0 +1,21 @@
+{
+  "name": "cace-interface",
+  "version": "1.0.0",
+  "description": "The common functionalities to communicate with the cache system",
+  "scripts": {
+    "build": "nest build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/useverto/cace-interface.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/useverto/cace-interface/issues"
+  },
+  "homepage": "https://github.com/useverto/cace-interface#readme",
+  "dependencies": {
+    "axios": "^0.23.0"
+  }
+}
