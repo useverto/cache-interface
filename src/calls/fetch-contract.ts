@@ -3,7 +3,13 @@ import axios from "axios";
 import {StateResult} from "../model";
 import {CacheInterfaceException} from "../errors/cache-interface-exception";
 
-export const fetchContract = async <T = any>(contractId: string, withValidity?: boolean): Promise<StateResult<T>> => {
+/**
+ * Fetchs a contract based on a contract id.
+ * @param contractId Contract ID to be fetched
+ * @param withValidity Whether Validity should be fetched
+ * @param dontThrow Whether an exception should be thrown if contract is not found
+ */
+export const fetchContract = async <T = any>(contractId: string, withValidity?: boolean, dontThrow?: boolean): Promise<StateResult<T> | undefined> => {
     try {
         const stateCdn = CommonUtils.buildStateCdn(contractId);
         const state = (await axios.get(stateCdn)).data as any;
@@ -13,6 +19,12 @@ export const fetchContract = async <T = any>(contractId: string, withValidity?: 
             validity
         }
     } catch (e) {
+
+        if(dontThrow) {
+            return undefined;
+        }
+
         throw new CacheInterfaceException(`Contract ${contractId} could not be fetched at this time.`, e);
+
     }
 }
