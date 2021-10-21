@@ -1,0 +1,3 @@
+/**
+ * cacheContractHook(() => {}, contractId, refreshCommunityContract?: boolean)
+ */
