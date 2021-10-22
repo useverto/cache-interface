@@ -7,8 +7,8 @@ import {fetchContractsInUser} from "./fetch-contracts-in-user";
  */
 export const fetchOwnershipByUsername = async (username: string) => {
     const userMetadata = await fetchUserMetadataByUsername(username);
-    if(userMetadata && userMetadata?.data) {
-        const addresses = userMetadata.data.addresses || [];
+    if(userMetadata) {
+        const addresses = userMetadata.addresses || [];
         if(addresses.length > 0) {
             let tokensIdWithOwnership: Array<string> = [];
             for (const address of addresses) {

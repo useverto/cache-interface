@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "The common functionalities to communicate with the cache system",
   "scripts": {
-    "build": "nest build"
+    "build": "nest build",
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -17,5 +18,10 @@
   "homepage": "https://github.com/useverto/cace-interface#readme",
   "dependencies": {
     "axios": "^0.23.0"
+  },
+  "devDependencies": {
+    "@types/jest": "^27.0.2",
+    "jest": "^27.3.1",
+    "ts-jest": "^27.0.7"
   }
 }

@@ -25,6 +25,5 @@ export const fetchContract = async <T = any>(contractId: string, withValidity?: 
         }
 
         throw new CacheInterfaceException(`Contract ${contractId} could not be fetched at this time.`, e);
-
     }
 }

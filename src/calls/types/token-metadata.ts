@@ -3,3 +3,8 @@ export interface TokenMetadata {
     type: string;
     lister: string;
 }
+
+export interface RandomArtworkResult {
+    entities: Array<TokenMetadata>;
+    resultsStatus: string;
+}
