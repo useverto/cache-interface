@@ -1,12 +1,13 @@
 {
   "name": "verto-cace-interface",
-  "version": "1.0.0",
-  "description": "The common functionalities to communicate with the cache system",
+  "version": "1.0.1",
+  "description": "A communication package with Verto Cache System",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
     "build": "nest build",
-    "test": "jest"
+    "test": "jest",
+    "publish": "npm run build && npm publish"
   },
   "repository": {
     "type": "git",
