@@ -313,15 +313,15 @@ Hooks are a way to invoke functions and then invoke certain behaviors inside the
 
 ### `cacheContractHook`
 
-**Signature**:
+**Signature**:  
 `cacheContractHook = async (action: () => Promise<any> | any,
 contractId?: string,
 refreshCommunityContract?: boolean)`
 
-**Parameters**:
-*action*: Action to be called inside before executing the hook
-*contractId*: Contract to be cached right after `action` has finished its execution
-*refreshCommunityContract*: Whether the community contract should be updated after `action` has finished its execution
+**Parameters**:  
+*action*: Action to be called inside before executing the hook  
+*contractId*: Contract to be cached right after `action` has finished its execution  
+*refreshCommunityContract*: Whether the community contract should be updated after `action` has finished its execution  
 
 **Usage**:
 
