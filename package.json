@@ -1,7 +1,9 @@
 {
-  "name": "cace-interface",
+  "name": "verto-cace-interface",
   "version": "1.0.0",
   "description": "The common functionalities to communicate with the cache system",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
     "build": "nest build",
     "test": "jest"

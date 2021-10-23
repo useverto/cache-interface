@@ -36,7 +36,8 @@ describe("API test", () => {
     });
 
     test("do not throw if invalid contract id", async () => {
-        (await expect(async () => await fetchContract("x", false, true)).rejects).not.toThrow();
+        const data = await fetchContract("x", false, true);
+        expect(data).toBe(undefined);
     });
 
     test("Fetch users", async () => {
