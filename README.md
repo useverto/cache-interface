@@ -27,6 +27,7 @@ $ npm install verto-cace-interface
                         withValidity?: boolean, 
                         dontThrow?: boolean): Promise<StateResult<T> | undefined>`
 
+**Usage**:
 ```typescript
 
 import { fetchContract } from 'verto-cace-interface';
