@@ -18,7 +18,7 @@ export const fetchTokenMetadata = async (tokenId: string, fromContract?: boolean
             return {
                 ...getTokenMetadata.data,
                 id: tokenId
-            };
+            } as TokenMetadata;
         }
 
         return undefined;

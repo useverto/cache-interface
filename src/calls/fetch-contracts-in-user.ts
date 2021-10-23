@@ -5,5 +5,5 @@ import {cacheApiBaseRequest} from "./cache-api-base-request";
  * @param addressId
  */
 export const fetchContractsInUser = async (addressId: string) => {
-    return (await cacheApiBaseRequest<Array<string>>(`users/contracts/${addressId}`))?.data;
+    return (await cacheApiBaseRequest<Array<string>>(`users/contracts/${addressId}`))?.data || [];
 }
