@@ -27,6 +27,12 @@ $ npm install verto-cace-interface
                         withValidity?: boolean, 
                         dontThrow?: boolean): Promise<StateResult<T> | undefined>`
 
+**Parameters**:  
+*T*: Interface of the contract state to be returned  
+*contractId*: Contract to be fetched  
+*withValidity*: Whether validity should be fetched (Default: false)  
+*dontThrow*: Whether it should not throw an error if contract is not found (Default: false)
+
 **Usage**:
 ```typescript
 
