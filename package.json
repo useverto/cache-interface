@@ -7,7 +7,7 @@
   "scripts": {
     "build": "nest build",
     "test": "jest",
-    "publish": "npm run build && npm publish"
+    "deliver": "npm run build && npm publish"
   },
   "repository": {
     "type": "git",
