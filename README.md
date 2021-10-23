@@ -20,7 +20,7 @@ $ npm install verto-cace-interface
 
 ## Usage
 
-### `fetchContract<T = any>(contractId: string, withValidity?: boolean, dontThrow?: boolean): Promise<StateResult<T> | undefined>`
+#### `fetchContract<T = any>(contractId: string, withValidity?: boolean, dontThrow?: boolean): Promise<StateResult<T> | undefined>`
 
 ```typescript
 
