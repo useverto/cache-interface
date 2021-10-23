@@ -35,7 +35,6 @@ $ npm install verto-cace-interface
 
 **Usage**:
 ```typescript
-
 import { fetchContract } from 'verto-cace-interface';
 
 fetchContract('t9T7DIOGxx4VWXoCEeYYarFYeERTpWIC1V3y-BPZgKE').then((result) => {
@@ -55,7 +54,6 @@ fetchContract('t9T7DIOGxx4VWXoCEeYYarFYeERTpWIC1V3y-BPZgKE').then((result) => {
 
 **Usage**:
 ```typescript
-
 import { fetchBalanceByUserAddress } from 'verto-cace-interface';
 
 fetchBalanceByUserAddress('vxUdiv2fGHMiIoek5E4l3M5qSuKCZtSaOBYjMRc94JU').then((result) => {
@@ -96,7 +94,6 @@ fetchBalancesForAddress('vxUdiv2fGHMiIoek5E4l3M5qSuKCZtSaOBYjMRc94JU').then((res
 
 **Usage**:
 ```typescript
-
 import { fetchBalancesInContract } from 'verto-cace-interface';
 
 fetchBalancesInContract('bQGRi3eO4p7S583mYYXDeVn5EvGPFMiMWd5WBWatteY').then((result) => {
@@ -118,7 +115,6 @@ fetchBalancesInContract('bQGRi3eO4p7S583mYYXDeVn5EvGPFMiMWd5WBWatteY').then((res
 
 **Usage**:
 ```typescript
-
 import { fetchCollectionById } from 'verto-cace-interface';
 
 fetchCollectionById('GirFtyB_PI4oQXhEFrHZLpFUqincHrDdDxPaQ1M8r00').then((result) => {
@@ -141,7 +137,6 @@ fetchCollectionById('GirFtyB_PI4oQXhEFrHZLpFUqincHrDdDxPaQ1M8r00').then((result)
 
 **Usage**:
 ```typescript
-
 import { fetchContractsInUser } from 'verto-cace-interface';
 
 fetchContractsInUser('vxUdiv2fGHMiIoek5E4l3M5qSuKCZtSaOBYjMRc94JU').then((result) => {
@@ -160,7 +155,6 @@ fetchContractsInUser('vxUdiv2fGHMiIoek5E4l3M5qSuKCZtSaOBYjMRc94JU').then((result
 
 **Usage**:
 ```typescript
-
 import { fetchOwnershipByUsername } from 'verto-cace-interface';
 
 fetchOwnershipByUsername('t8').then((result) => {
@@ -180,7 +174,6 @@ fetchOwnershipByUsername('t8').then((result) => {
 
 **Usage**:
 ```typescript
-
 import { fetchTokenMetadata } from 'verto-cace-interface';
 
 fetchTokenMetadata('bQGRi3eO4p7S583mYYXDeVn5EvGPFMiMWd5WBWatteY').then((result) => {
@@ -200,7 +193,6 @@ fetchTokenMetadata('bQGRi3eO4p7S583mYYXDeVn5EvGPFMiMWd5WBWatteY').then((result) 
 
 **Usage**:
 ```typescript
-
 import { fetchTokenStateMetadata } from 'verto-cace-interface';
 
 fetchTokenStateMetadata('bQGRi3eO4p7S583mYYXDeVn5EvGPFMiMWd5WBWatteY').then((result) => {
@@ -222,7 +214,6 @@ fetchTokenStateMetadata('bQGRi3eO4p7S583mYYXDeVn5EvGPFMiMWd5WBWatteY').then((res
 **Usage**:
 
 ```typescript
-
 import { fetchTokens } from 'verto-cace-interface';
 
 fetchTokens().then((result) => {
@@ -245,7 +236,6 @@ fetchTokens().then((result) => {
 
 **Usage**:
 ```typescript
-
 import { fetchRandomArtwork } from 'verto-cace-interface';
 
 fetchRandomArtwork().then((result) => {
@@ -269,7 +259,6 @@ fetchRandomArtwork().then((result) => {
 
 **Usage**:
 ```typescript
-
 import { fetchUserCreations } from 'verto-cace-interface';
 
 fetchUserCreations('t8').then((result) => {
@@ -288,7 +277,6 @@ fetchUserCreations('t8').then((result) => {
 
 **Usage**:
 ```typescript
-
 import { fetchUserMetadataByUsername } from 'verto-cace-interface';
 
 fetchUserMetadataByUsername('t8').then((result) => {
@@ -304,7 +292,6 @@ fetchUserMetadataByUsername('t8').then((result) => {
 
 **Usage**:
 ```typescript
-
 import { fetchUsers } from 'verto-cace-interface';
 
 fetchUsers().then((result) => {
@@ -319,3 +306,40 @@ fetchUsers().then((result) => {
 })
 ```
 
+
+## Hooks
+Hooks are a way to invoke functions and then invoke certain behaviors inside the cache system.
+
+
+### `cacheContractHook`
+
+**Signature**:
+`cacheContractHook = async (action: () => Promise<any> | any,
+contractId?: string,
+refreshCommunityContract?: boolean)`
+
+**Parameters**:
+*action*: Action to be called inside before executing the hook
+*contractId*: Contract to be cached right after `action` has finished its execution
+*refreshCommunityContract*: Whether the community contract should be updated after `action` has finished its execution
+
+**Usage**:
+
+```typescript
+import { cacheContractHook } from 'verto-cace-interface';
+
+const currentContract: string = 'ABCD1234'
+
+const executeOrder = await cacheContractHook(async () => {
+    // Execute an order inside the exchange
+    // Or do something different, maybe buy a car.
+    return 'ORDER_SENT';
+}, currentContract, true);
+
+assert(executeOrder === 'ORDER_SENT');
+```
+
+**Lifecycle**:
+1) Execute `action` (if asynchronous, it will be awaited)
+2) Call Cache API to invoke caching of `contractId`
+3) if `refreshCommunityContract` is `true`, call Cache API to invoke caching of community contract
