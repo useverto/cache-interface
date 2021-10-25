@@ -20,4 +20,5 @@ export * from './calls/fetch-tokens';
 export * from './calls/fetch-user-creations';
 export * from './calls/fetch-user-metadata-by-username';
 export * from './calls/fetch-users';
+export * from './calls/fetch-balance-by-username'
 export * from './hooks/cache-contract-hook';

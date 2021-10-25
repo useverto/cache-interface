@@ -11,6 +11,7 @@ import {fetchCollectionById} from "../calls/fetch-collection-by-id";
 import {fetchBalancesInContract} from "../calls/fetch-balances-in-contract";
 import {fetchBalancesForAddress} from "../calls/fetch-balances-for-address";
 import {fetchTokenStateMetadata} from "../calls/fetch-token-state-metadata";
+import {fetchBalancesByUsername} from "../calls/fetch-balance-by-username";
 
 describe("API test", () => {
     test("Fetch Contract", async () => {
@@ -109,6 +110,18 @@ describe("API test", () => {
         const balances = await fetchBalancesForAddress('6LL7EU-CIVLSIYajnFelAQi6Uefv4lqrZBcv9bNwxFI');
         const hasArconf = balances.some((item) => item.name === 'ArCoNFT-01 Edition 100' && item.balance >= 1);
         expect(hasArconf).toBeTruthy();
+    });
+
+    test("Fetch balances for user address with filter type", async () => {
+        const balances = await fetchBalancesForAddress('6LL7EU-CIVLSIYajnFelAQi6Uefv4lqrZBcv9bNwxFI', 'art');
+        const hasArconf = balances.some((item) => item.name === 'ArCoNFT-01 Edition 100' && item.balance >= 1);
+        expect(hasArconf).toBeTruthy();
+    });
+
+    test("Fetch balances given a username", async () => {
+       const balances = await fetchBalancesByUsername('t8')
+       const hasArVerify = balances?.some((item) => item.contractId === 'f6lW-sKxsc340p8eBBL2i_fnmSI_fRSFmkqvzqyUsRs');
+       expect(hasArVerify).toBeTruthy();
     });
 
     test("Fetch artwork", async () => {

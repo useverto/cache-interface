@@ -1,5 +1,6 @@
 import {fetchBalancesInContract} from "./fetch-balances-in-contract";
 import {UserBalance} from "./types/user-balance-model";
+import {fetchTokenMetadata} from "./fetch-token-metadata";
 
 /**
  * Fetch a balance for a given user inside a given contract
@@ -9,6 +10,7 @@ import {UserBalance} from "./types/user-balance-model";
  */
 export const fetchBalanceByUserAddress = async (contractId: string, userAddress: string): Promise<UserBalance | undefined> => {
     const [balances, contractMetadata] = await fetchBalancesInContract(contractId);
+    const tokenMetadata = await fetchTokenMetadata(contractId);
     const stateKeys = Object.keys(contractMetadata);
 
     if(stateKeys.length <= 0) {
@@ -21,6 +23,7 @@ export const fetchBalanceByUserAddress = async (contractId: string, userAddress:
         logo: contractMetadata?.settings?.communityLogo,
         balance: balances[userAddress] || 0,
         contractId,
-        userAddress
+        userAddress,
+        type: tokenMetadata?.type
     };
 }

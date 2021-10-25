@@ -56,23 +56,25 @@ fetchContract('t9T7DIOGxx4VWXoCEeYYarFYeERTpWIC1V3y-BPZgKE').then((result) => {
 ```typescript
 import { fetchBalanceByUserAddress } from 'verto-cace-interface';
 
-fetchBalanceByUserAddress('vxUdiv2fGHMiIoek5E4l3M5qSuKCZtSaOBYjMRc94JU').then((result) => {
+fetchBalanceByUserAddress('bQGRi3eO4p7S583mYYXDeVn5EvGPFMiMWd5WBWatteY', 'vxUdiv2fGHMiIoek5E4l3M5qSuKCZtSaOBYjMRc94JU').then((result) => {
     const contractId = result.contractId;
     const contractName = result.name;
     const contractTicker = result.ticker;
     const contractLogo = result.logo;
     const userBalance = result.balance;
     const userAddress = result.userAddress;
+    const contractType = result.type;
 })
 ```
 
 ### Fetching all the balances available for a given address
 
 **Signature**:  
-`fetchBalancesForAddress = async (userAddress: string): Promise<Array<UserBalance>>`
+`fetchBalancesForAddress = async (userAddress: string, tokenType?: string): Promise<Array<UserBalance>>`
 
 **Parameters**:
 *userAddress*: Address to obtain balance from
+*tokenType*: Type to filter balances from, for example: 'art'.
 
 **Usage**:
 ```typescript
@@ -81,6 +83,28 @@ import { fetchBalancesForAddress } from 'verto-cace-interface';
 
 fetchBalancesForAddress('vxUdiv2fGHMiIoek5E4l3M5qSuKCZtSaOBYjMRc94JU').then((result) => {
     const balances: Array<UserBalance> = result;
+})
+```
+
+### Fetching all the balances for a given username
+
+**Signature**:  
+`fetchBalancesByUsername = async (username: string, tokenType?: string): Promise<Array<UserBalance> | undefined>`
+
+**Parameters**:
+*username*: Username to fetch balances from.
+*tokenType*: Type to filter balances from, for example: 'art'.
+
+**Usage**:
+```typescript
+import { fetchBalancesByUsername } from 'verto-cace-interface';
+
+fetchBalancesByUsername('t8').then((result) => {
+    const balances: Array<UserBalance> = result;
+    balances.forEach((balance) => {
+        console.log('Contract Id ', balance.contractId);
+        console.log('Balance ', balance.balance);
+    })
 })
 ```
 
