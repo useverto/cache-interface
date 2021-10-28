@@ -15,7 +15,7 @@
 Install with [npm](https://npmjs.com):
 
 ```
-$ npm install verto-cace-interface
+$ npm install verto-cache-interface
 ```
 
 ## Usage

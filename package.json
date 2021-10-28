@@ -1,6 +1,6 @@
 {
-  "name": "verto-cace-interface",
-  "version": "1.0.5",
+  "name": "verto-cache-interface",
+  "version": "1.0.6",
   "description": "A communication package with Verto Cache System",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -11,14 +11,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/useverto/cace-interface.git"
+    "url": "git+https://github.com/useverto/cache-interface.git"
   },
   "author": "",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/useverto/cace-interface/issues"
+    "url": "https://github.com/useverto/cache-interface/issues"
   },
-  "homepage": "https://github.com/useverto/cace-interface#readme",
+  "homepage": "https://github.com/useverto/cache-interface#readme",
   "dependencies": {
     "axios": "^0.23.0"
   },
