@@ -339,12 +339,12 @@ Hooks are a way to invoke functions and then invoke certain behaviors inside the
 
 **Signature**:  
 `cacheContractHook = async (action: () => Promise<any> | any,
-contractId?: string,
+contractId?: string | string[],
 refreshCommunityContract?: boolean)`
 
 **Parameters**:  
 *action*: Action to be called inside before executing the hook  
-*contractId*: Contract to be cached right after `action` has finished its execution  
+*contractId*: Contract to be cached right after `action` has finished its execution. If an array, it'll cache all the ids provided in the array.  
 *refreshCommunityContract*: Whether the community contract should be updated after `action` has finished its execution  
 
 **Usage**:
@@ -353,6 +353,7 @@ refreshCommunityContract?: boolean)`
 import { cacheContractHook } from 'verto-cace-interface';
 
 const currentContract: string = 'ABCD1234'
+// const currentContracts: string[] = ['ABCD1234', '12903LLLEP'];
 
 const executeOrder = await cacheContractHook(async () => {
     // Execute an order inside the exchange
