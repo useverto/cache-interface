@@ -28,4 +28,16 @@ describe('Test hooks', () => {
         expect(spy).toHaveBeenCalledWith(CacheInterfaceConstants.COMMUNITY_CONTRACT);
         expect(spy).toHaveBeenCalledTimes(2);
     });
+
+    test('Cache contract hook with multiple contracts to refresh', async () => {
+        const spy = jest.spyOn(cacheContractsModule, 'cacheContract');
+        spy.mockImplementation();
+        const fn = jest.fn();
+        await cacheContractHook(fn, ['ABC', 'DEF'], true);
+        expect(fn).toHaveBeenCalled();
+        expect(spy).toHaveBeenCalledWith('ABC');
+        expect(spy).toHaveBeenCalledWith('DEF');
+        expect(spy).toHaveBeenCalledWith(CacheInterfaceConstants.COMMUNITY_CONTRACT);
+        expect(spy).toHaveBeenCalledTimes(3);
+    });
 })

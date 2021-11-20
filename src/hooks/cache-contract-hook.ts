@@ -9,11 +9,21 @@ import {CacheInterfaceConstants} from "../constants";
  * @return the result of the call for {@param action}
  */
 export const cacheContractHook = async (action: () => Promise<any> | any,
-                                        contractId?: string,
+                                        contractId?: string | string[],
                                         refreshCommunityContract?: boolean) => {
     let response = await action();
     if(contractId) {
-        await cacheContract(contractId);
+        let ids: Array<string> = [];
+
+        if(!Array.isArray(contractId)) {
+            ids = [contractId];
+        } else {
+            ids = [...contractId];
+        }
+
+        for (let id of ids) {
+            await cacheContract(id);
+        }
     }
     if(refreshCommunityContract) {
         await cacheContract(CacheInterfaceConstants.COMMUNITY_CONTRACT);
