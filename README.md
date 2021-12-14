@@ -331,6 +331,44 @@ fetchUsers().then((result) => {
 ```
 
 
+### Fetching user by username
+
+**Signature**:  
+`fetchUserByUsername = async (): Promise<CommunityContractPeople | undefined>`
+
+**Usage**:
+```typescript
+import { fetchUserByUsername } from 'verto-cache-interface';
+
+fetchUserByUsername('t8').then((result) => {
+    console.log('Username ', user.username);
+    console.log('Name ', user.name);
+    console.log('Addresses ', user.addresses);
+    console.log('Image ', user.image);
+    console.log('Bio ', user.bio);
+    console.log('Links ', user.links);
+});
+```
+
+
+### Fetching random artwork with owner information
+
+**Signature**:  
+`fetchRandomArtworkWithUser = async (): Promise<ArtworkOwner>`
+
+**Usage**:
+```typescript
+import { fetchRandomArtworkWithUser } from 'verto-cache-interface';
+
+fetchRandomArtworkWithUser().then((result) => {
+    console.log('Artwork ID ', result.id);
+    console.log('Name ', result.name);
+    console.log('Type ', result.type);
+    console.log('Images ', result.images);
+    console.log('Owner username ', result.owner.username);
+})
+```
+
 ## Hooks
 Hooks are a way to invoke functions and then invoke certain behaviors inside the cache system.
 

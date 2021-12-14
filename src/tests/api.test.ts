@@ -12,6 +12,7 @@ import {fetchBalancesInContract} from "../calls/fetch-balances-in-contract";
 import {fetchBalancesForAddress} from "../calls/fetch-balances-for-address";
 import {fetchTokenStateMetadata} from "../calls/fetch-token-state-metadata";
 import {fetchBalancesByUsername} from "../calls/fetch-balance-by-username";
+import {fetchRandomArtworkWithUser} from "../calls/fetch-random-artwork-with-user";
 
 describe("API test", () => {
     test("Fetch Contract", async () => {
@@ -132,6 +133,17 @@ describe("API test", () => {
             ticker: 'ARCONFT100',
             owner: 't8'
         });
+    });
+
+    test("Fetch random artwork with user", async () => {
+        const tokenArtwork = await fetchRandomArtworkWithUser(1);
+        expect(tokenArtwork!.id).not.toBeUndefined();
+        expect(tokenArtwork!.name).not.toBeUndefined();
+        if(tokenArtwork!.type === "collection") {
+            expect(tokenArtwork!.images).not.toBeUndefined();
+            expect(tokenArtwork!.images.length).toBeGreaterThanOrEqual(1);
+        }
+        expect(tokenArtwork!.owner.username).not.toBeUndefined();
     });
 });
 
