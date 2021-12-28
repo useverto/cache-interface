@@ -19,3 +19,11 @@ export interface CommunityContractState {
     people: Array<CommunityContractPeople>
     tokens: Array<CommunityContractToken>;
 }
+
+export interface RandomCommunities {
+    id: string;
+    name: string;
+    ticker: string;
+    logo: string;
+    description: string;
+}

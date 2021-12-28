@@ -5,7 +5,7 @@ export interface TokenMetadata {
     id?: string;
 }
 
-export interface RandomArtworkResult {
+export interface TokenMetadataLookUp {
     entities: Array<TokenMetadata>;
     resultsStatus: string;
 }

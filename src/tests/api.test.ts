@@ -13,6 +13,8 @@ import {fetchBalancesForAddress} from "../calls/fetch-balances-for-address";
 import {fetchTokenStateMetadata} from "../calls/fetch-token-state-metadata";
 import {fetchBalancesByUsername} from "../calls/fetch-balance-by-username";
 import {fetchRandomArtworkWithUser} from "../calls/fetch-random-artwork-with-user";
+import {fetchArtworkMetadata} from "../calls/fetch-artwork-metadata";
+import {fetchRandomCommunitiesWithMetadata} from "../calls/fetch-random-communities-with-metadata";
 
 describe("API test", () => {
     test("Fetch Contract", async () => {
@@ -145,6 +147,20 @@ describe("API test", () => {
         }
         expect(tokenArtwork!.owner.username).not.toBeUndefined();
     });
+
+    test("Fetch artwork metadata", async () => {
+        const artworkMetadata = await fetchArtworkMetadata("oanaZYYB7DmWFPb2fFOxSJA1Xy7ffu1msId2Ii7olqM");
+        expect(artworkMetadata).toStrictEqual({"id":"oanaZYYB7DmWFPb2fFOxSJA1Xy7ffu1msId2Ii7olqM","name":"ArCoNFT-01 Edition 43","lister":{"username":"t8","name":"Tate Berenbaum","addresses":["pvPWBZ8A5HLpGSEfhEmK1A3PfMgB_an8vVS6L14Hsls"],"bio":"Founder of Verto","links":{"twitter":"TateBerenbaum","github":"t8"},"image":"UGu1pI3ObS3wzdQ_GZwOr0DoWShTj4EPFgyHfDaHFgI"}});
+    })
+
+    test("Fetch community metadata", async () => {
+        const communities = await fetchRandomCommunitiesWithMetadata();
+        expect(communities.length).toBeGreaterThanOrEqual(4);
+        expect(communities[0].id).not.toBeUndefined();
+        expect(communities[0].name).not.toBeUndefined();
+        expect(communities[0].ticker).not.toBeUndefined();
+
+    })
 });
 
 
