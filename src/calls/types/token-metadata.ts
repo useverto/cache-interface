@@ -1,3 +1,5 @@
+import {LookUp} from "./lookup";
+
 export interface TokenMetadata {
     contractId: string;
     type: string;
@@ -5,7 +7,5 @@ export interface TokenMetadata {
     id?: string;
 }
 
-export interface RandomArtworkResult {
-    entities: Array<TokenMetadata>;
-    resultsStatus: string;
+export interface TokenMetadataLookUp extends LookUp<TokenMetadata> {
 }
