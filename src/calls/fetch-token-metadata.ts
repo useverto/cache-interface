@@ -1,6 +1,6 @@
 import {cacheApiBaseRequest} from "./cache-api-base-request";
 import {TokenMetadata} from "./types/token-metadata";
-import {fetchTokens} from "./fetch-tokens";
+import {fetchTokenById} from "./fetch-token-by-id";
 
 /**
  * Returns the metadata of a token (contractId, type, lister)
@@ -9,8 +9,7 @@ import {fetchTokens} from "./fetch-tokens";
  */
 export const fetchTokenMetadata = async (tokenId: string, fromContract?: boolean) => {
     if(fromContract) {
-        const allTokens = await fetchTokens();
-        return allTokens.find((token) => token.id === tokenId);
+        return fetchTokenById(tokenId);
     } else {
         const getTokenMetadata = await cacheApiBaseRequest<TokenMetadata>(`token/metadata/${tokenId}`);
 

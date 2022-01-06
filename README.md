@@ -369,6 +369,128 @@ fetchRandomArtworkWithUser().then((result) => {
 })
 ```
 
+### Fetching random communities without full metadata
+
+**Signature**:  
+`fetchRandomCommunities = async (): Promise<TokenMetadataLookUp>`
+
+**Usage**:
+```typescript
+import { fetchRandomCommunities } from 'verto-cache-interface';
+
+fetchRandomCommunities().then((result) => {
+    const communities = result.entities;
+    communities.forEach((com) => {
+        console.log(com.contractId);
+        console.log(com.type);
+        console.log(com.lister);
+        console.log(com.id);
+    })
+})
+```
+
+### Fetching random communities with full metadata
+
+**Signature**:  
+`fetchRandomCommunitiesWithMetadata = async (): Promise<Array<RandomCommunities>>`
+
+**Usage**:
+```typescript
+import { fetchRandomCommunitiesWithMetadata } from 'verto-cache-interface';
+
+fetchRandomCommunitiesWithMetadata().then((result) => {
+    result.forEach((com) => {
+        console.log(com.id);
+        console.log(com.name);
+        console.log(com.ticker);
+        console.log(com.logo);
+        console.log(com.description);
+    })
+})
+```
+
+### Fetching top communities with full metadata
+
+**Signature**:  
+`fetchTopCommunities = async (): Promise<Array<RandomCommunities>>`
+
+**Usage**:
+```typescript
+import { fetchTopCommunities } from 'verto-cache-interface';
+
+fetchTopCommunities().then((result) => {
+    result.forEach((com) => {
+        console.log(com.id);
+        console.log(com.name);
+        console.log(com.ticker);
+        console.log(com.logo);
+        console.log(com.description);
+    })
+})
+```
+
+### Fetching full metadata for given communities
+
+**Signature**:  
+`fetchCommunitiesMetadata = async (communityContractIds: Array<string> | string): Promise<Array<RandomCommunities>>`
+
+**Usage**:
+```typescript
+import { fetchCommunitiesMetadata } from 'verto-cache-interface';
+
+fetchCommunitiesMetadata(["MY-community-id1", "MY-community-id2"]).then((result) => {
+    result.forEach((com) => {
+        console.log(com.id);
+        console.log(com.name);
+        console.log(com.ticker);
+        console.log(com.logo);
+        console.log(com.description);
+    })
+})
+```
+
+### Fetching artwork metadata
+
+**Signature**:  
+`fetchArtworkMetadata = async (): Promise<ArtworkMetadata | undefined>`
+
+**Usage**:
+```typescript
+import { fetchArtworkMetadata } from 'verto-cache-interface';
+
+fetchArtworkMetadata().then((result) => {
+    console.log(result.id);
+    console.log(result.name);
+    console.log(result.lister); // Object (username, name, addresses, bio, links, image)
+    console.log(result.lister.addresses);
+    console.log(result.lister.bio);
+    console.log(result.lister.links);
+})
+```
+
+### Fetching token by id and optional filtering
+
+**Signature**:  
+`fetchTokenById = async (tokenId: string, filter?: (val: CommunityContractToken) => boolean): Promise<CommunityContractToken | undefined>`
+
+**Usage**:
+```typescript
+import { fetchTokenById } from 'verto-cache-interface';
+
+fetchTokenById("ABC").then((result) => {
+    console.log(result.id);
+    console.log(result.type);
+    console.log(result.lister);
+});
+
+
+fetchTokenById("ABC", (filterData) => filterData.type === "community").then((result) => {
+    console.log(result.id);
+    console.log(result.type);
+    console.log(result.lister);
+});
+```
+
 ## Hooks
 Hooks are a way to invoke functions and then invoke certain behaviors inside the cache system.
 
