@@ -15,6 +15,7 @@ import {fetchBalancesByUsername} from "../calls/fetch-balance-by-username";
 import {fetchRandomArtworkWithUser} from "../calls/fetch-random-artwork-with-user";
 import {fetchArtworkMetadata} from "../calls/fetch-artwork-metadata";
 import {fetchRandomCommunitiesWithMetadata} from "../calls/fetch-random-communities-with-metadata";
+import {fetchTopCommunities} from "../calls/fetch-top-communities";
 
 describe("API test", () => {
     test("Fetch Contract", async () => {
@@ -159,7 +160,14 @@ describe("API test", () => {
         expect(communities[0].id).not.toBeUndefined();
         expect(communities[0].name).not.toBeUndefined();
         expect(communities[0].ticker).not.toBeUndefined();
+    })
 
+    test("Fetch top communities", async () => {
+        const topComs = await fetchTopCommunities();
+        expect(topComs.length).toBeGreaterThanOrEqual(4);
+        expect(topComs[0].id).not.toBeUndefined();
+        expect(topComs[0].name).not.toBeUndefined();
+        expect(topComs[0].ticker).not.toBeUndefined();
     })
 });
 

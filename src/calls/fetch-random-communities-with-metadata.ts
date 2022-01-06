@@ -14,23 +14,27 @@ export const fetchRandomCommunitiesWithMetadata = async (limit?: number): Promis
         return [];
     } else {
         const contractIds = lookupEntities.map((item) => item.contractId);
-        const communities: Array<RandomCommunities> = [];
-        for (const communitiesKey of contractIds) {
-            const contract = await fetchContract(communitiesKey, false, true);
-            if(contract) {
-                const contractState = contract.state;
-                const settings: Array<string> = (contractState.settings || []).flat();
-                const logoIndex = settings.findIndex(item => item === "communityLogo");
-                const descriptionIndex = settings.findIndex(item => item === "communityDescription");
-                communities.push({
-                    id: communitiesKey,
-                    name: contractState.name,
-                    ticker: contractState.ticker,
-                    logo: settings[logoIndex + 1],
-                    description:  settings[descriptionIndex + 1],
-                })
-            }
-        }
-        return communities;
+        return fetchCommunityMetadata(contractIds);
     }
+}
+
+export const fetchCommunityMetadata = async (contractIds: Array<string>) => {
+    const communities: Array<RandomCommunities> = [];
+    for (const communitiesKey of contractIds) {
+        const contract = await fetchContract(communitiesKey, false, true);
+        if(contract) {
+            const contractState = contract.state;
+            const settings: Array<string> = (contractState.settings || []).flat();
+            const logoIndex = settings.findIndex(item => item === "communityLogo");
+            const descriptionIndex = settings.findIndex(item => item === "communityDescription");
+            communities.push({
+                id: communitiesKey,
+                name: contractState.name,
+                ticker: contractState.ticker,
+                logo: settings[logoIndex + 1],
+                description:  settings[descriptionIndex + 1],
+            })
+        }
+    }
+    return communities;
 }

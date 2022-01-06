@@ -27,3 +27,8 @@ export interface RandomCommunities {
     logo: string;
     description: string;
 }
+
+export interface CommunityBalancesRaw {
+    contractId: string;
+    balanceLength: number;
+}
