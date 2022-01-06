@@ -1,6 +1,6 @@
 {
   "name": "verto-cache-interface",
-  "version": "1.0.8",
+  "version": "1.1.0",
   "description": "A communication package with Verto Cache System",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
