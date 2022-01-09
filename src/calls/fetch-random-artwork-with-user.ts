@@ -11,24 +11,26 @@ interface ArtworkOwner {
     owner: CommunityContractPeople
 }
 
-export const fetchRandomArtworkWithUser = async (amount?: number): Promise<ArtworkOwner | undefined> => {
-    const artwork = (await fetchRandomArtwork(amount || 1))?.entities?.[0];
+export const fetchRandomArtworkWithUser = async (amount?: number): Promise<Array<ArtworkOwner>> => {
+    const artwork = (await fetchRandomArtwork(amount || 4))?.entities || [];
+    const result: Array<ArtworkOwner> = [];
 
-    if (artwork) {
-        const artworkId = artwork.contractId;
+    for (let artworkElement of artwork) {
+        const artworkId = artworkElement.contractId;
         const artworkState = (await fetchContract(artworkId))?.state;
         if(artworkState) {
-            const owner = await fetchUserByUsername(artwork.lister);
+            const owner = await fetchUserByUsername(artworkElement.lister);
             if(owner) {
-                return {
+                result.push({
                     id: artworkId,
                     name: artworkState.name,
-                    type: artwork.type,
-                    images: (artwork.type === "collection" && artworkState.items.slice(0, 3)) || [],
+                    type: artworkElement.type,
+                    images: (artworkElement.type === "collection" && artworkState?.items?.slice(0, 3)) || [],
                     owner
-                }
+                });
             }
         }
     }
 
+    return result;
 }

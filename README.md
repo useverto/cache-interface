@@ -354,18 +354,20 @@ fetchUserByUsername('t8').then((result) => {
 ### Fetching random artwork with owner information
 
 **Signature**:  
-`fetchRandomArtworkWithUser = async (): Promise<ArtworkOwner>`
+`fetchRandomArtworkWithUser = async (amount?: number): Promise<Array<ArtworkOwner>>`
 
 **Usage**:
 ```typescript
 import { fetchRandomArtworkWithUser } from 'verto-cache-interface';
 
-fetchRandomArtworkWithUser().then((result) => {
-    console.log('Artwork ID ', result.id);
-    console.log('Name ', result.name);
-    console.log('Type ', result.type);
-    console.log('Images ', result.images);
-    console.log('Owner username ', result.owner.username);
+fetchRandomArtworkWithUser().then((arts) => {
+    arts.forEach(result => {
+        console.log('Artwork ID ', result.id);
+        console.log('Name ', result.name);
+        console.log('Type ', result.type);
+        console.log('Images ', result.images);
+        console.log('Owner username ', result.owner.username);
+    });
 })
 ```
 

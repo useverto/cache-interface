@@ -139,14 +139,15 @@ describe("API test", () => {
     });
 
     test("Fetch random artwork with user", async () => {
-        const tokenArtwork = await fetchRandomArtworkWithUser(1);
-        expect(tokenArtwork!.id).not.toBeUndefined();
-        expect(tokenArtwork!.name).not.toBeUndefined();
-        if(tokenArtwork!.type === "collection") {
-            expect(tokenArtwork!.images).not.toBeUndefined();
-            expect(tokenArtwork!.images.length).toBeGreaterThanOrEqual(1);
+        const tokenArtwork = await fetchRandomArtworkWithUser();
+        expect(tokenArtwork.length).toBeGreaterThanOrEqual(4);
+        expect(tokenArtwork[0]!.id).not.toBeUndefined();
+        expect(tokenArtwork[0]!.name).not.toBeUndefined();
+        if(tokenArtwork[0]!.type === "collection") {
+            expect(tokenArtwork[0]!.images).not.toBeUndefined();
+            expect(tokenArtwork[0]!.images.length).toBeGreaterThanOrEqual(1);
         }
-        expect(tokenArtwork!.owner.username).not.toBeUndefined();
+        expect(tokenArtwork[0]!.owner.username).not.toBeUndefined();
     });
 
     test("Fetch artwork metadata", async () => {
