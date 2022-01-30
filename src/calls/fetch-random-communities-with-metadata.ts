@@ -1,6 +1,7 @@
 import {RandomCommunities} from "./types/community-contract-state";
 import {fetchRandomCommunities} from "./fetch-random-communities";
 import {fetchContract} from "./fetch-contract";
+import {getNameAndTickerAndLogoAndDescription} from "../utils/process-utils";
 
 /**
  * Fetches random communities with included metadata such as name, ticker, logo and description.
@@ -23,17 +24,8 @@ export const fetchCommunityMetadata = async (contractIds: Array<string>) => {
     for (const communitiesKey of contractIds) {
         const contract = await fetchContract(communitiesKey, false, true);
         if(contract) {
-            const contractState = contract.state;
-            const settings: Array<string> = (contractState.settings || []).flat();
-            const logoIndex = settings.findIndex(item => item === "communityLogo");
-            const descriptionIndex = settings.findIndex(item => item === "communityDescription");
-            communities.push({
-                id: communitiesKey,
-                name: contractState.name,
-                ticker: contractState.ticker,
-                logo: settings[logoIndex + 1],
-                description:  settings[descriptionIndex + 1],
-            })
+            const processedInfo = getNameAndTickerAndLogoAndDescription(communitiesKey, contract.state);
+            communities.push(processedInfo);
         }
     }
     return communities;
