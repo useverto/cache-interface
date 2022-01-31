@@ -493,6 +493,24 @@ fetchTokenById("ABC", (filterData) => filterData.type === "community").then((res
 });
 ```
 
+### Fetching Paginated Items (Tokens | People)
+
+**Signature**:  
+`fetchPaginated = async<T extends PaginatedToken | CommunityPeople>(type: "people" | "tokens", pageSize: number = 10, page: number = 1): Promise<PaginatedData<T>>`
+
+**Usage**:
+```typescript
+import { fetchPaginated } from 'verto-cache-interface';
+
+fetchPaginated<PaginatedToken>("tokens").then(async (result) => {
+    console.log(result.items); // [token1, token2, ...]
+    console.log(result.hasNextPage()) // true
+    console.log((await result.nextPage())) // CALL next page: fetchPaginated("tokens", 10, 2) 
+    console.log(result.isEmpty()) // False
+    console.log(result.getPaginationInfo()) // Information about paginated results
+});
+```
+
 ## Hooks
 Hooks are a way to invoke functions and then invoke certain behaviors inside the cache system.
 

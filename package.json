@@ -20,7 +20,8 @@
   },
   "homepage": "https://github.com/useverto/cache-interface#readme",
   "dependencies": {
-    "axios": "^0.23.0"
+    "axios": "^0.23.0",
+    "verto-internals": "^0.7.0"
   },
   "devDependencies": {
     "@types/jest": "^27.0.2",

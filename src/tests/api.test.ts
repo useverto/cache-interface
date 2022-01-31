@@ -17,6 +17,7 @@ import {fetchArtworkMetadata} from "../calls/fetch-artwork-metadata";
 import {fetchRandomCommunitiesWithMetadata} from "../calls/fetch-random-communities-with-metadata";
 import {fetchTopCommunities} from "../calls/fetch-top-communities";
 import {fetchPaginated} from "../calls/fetch-paginated";
+import {PaginatedToken} from "../calls/types/token-metadata";
 
 describe("API test", () => {
     test("Fetch Contract", async () => {
@@ -174,7 +175,7 @@ describe("API test", () => {
 
     jest.setTimeout(10000);
     test("Fetch paginated tokens", async () => {
-       const tokens = await fetchPaginated("tokens", 2, 1);
+       const tokens = await fetchPaginated<PaginatedToken>("tokens", 2, 1);
        expect(tokens.items).toEqual([
                {
                    id: 'bQGRi3eO4p7S583mYYXDeVn5EvGPFMiMWd5WBWatteY',

@@ -2,8 +2,9 @@ import {cacheApiBaseRequest} from "./cache-api-base-request";
 import {PaginationResult} from "verto-internals/services/miscellaneous";
 import {CommunityPeople} from "verto-internals/interfaces/contracts";
 import {PaginatedToken} from "./types/token-metadata";
+import {PaginatedData} from "verto-internals/services/miscellaneous/models";
 
-export const fetchPaginated = async (type: "people" | "tokens", pageSize: number = 50, page: number = 1) => {
+export const fetchPaginated = async<T extends PaginatedToken | CommunityPeople>(type: "people" | "tokens", pageSize: number = 50, page: number = 1): Promise<PaginatedData<T>> => {
     const data = (await cacheApiBaseRequest<PaginationResult>(`token/paginate?type=${type}&size=${pageSize}&page=${page}`))?.data;
     const paginationInfo = data?.paginationInfo || {
         page: 0,
@@ -13,7 +14,7 @@ export const fetchPaginated = async (type: "people" | "tokens", pageSize: number
         count: 0
     };
 
-    let results: Array<PaginatedToken | CommunityPeople> = data?.items || [];
+    let results: Array<T> = data?.items || [];
 
     return {
         items: results,
