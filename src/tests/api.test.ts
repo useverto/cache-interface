@@ -16,6 +16,8 @@ import {fetchRandomArtworkWithUser} from "../calls/fetch-random-artwork-with-use
 import {fetchArtworkMetadata} from "../calls/fetch-artwork-metadata";
 import {fetchRandomCommunitiesWithMetadata} from "../calls/fetch-random-communities-with-metadata";
 import {fetchTopCommunities} from "../calls/fetch-top-communities";
+import {fetchPaginated} from "../calls/fetch-paginated";
+import {PaginatedToken} from "../calls/types/token-metadata";
 
 describe("API test", () => {
     test("Fetch Contract", async () => {
@@ -169,7 +171,94 @@ describe("API test", () => {
         expect(topComs[0].id).not.toBeUndefined();
         expect(topComs[0].name).not.toBeUndefined();
         expect(topComs[0].ticker).not.toBeUndefined();
-    })
+    });
+
+    jest.setTimeout(10000);
+    test("Fetch paginated tokens", async () => {
+       const tokens = await fetchPaginated<PaginatedToken>("tokens", 2, 1);
+       expect(tokens.items).toEqual([
+               {
+                   id: 'bQGRi3eO4p7S583mYYXDeVn5EvGPFMiMWd5WBWatteY',
+                   ticker: 'ARCONFT100',
+                   name: 'ArCoNFT-01 Edition 100',
+                   type: 'art',
+                   lister: {
+                       "username": "t8",
+                       "name": "Tate Berenbaum",
+                       "addresses": [
+                           "pvPWBZ8A5HLpGSEfhEmK1A3PfMgB_an8vVS6L14Hsls"
+                       ],
+                       "bio": "Founder of Verto",
+                       "links": {
+                           "twitter": "TateBerenbaum",
+                           "github": "t8"
+                       },
+                       "image": "UGu1pI3ObS3wzdQ_GZwOr0DoWShTj4EPFgyHfDaHFgI"
+                   }
+               },
+               {
+                   id: 'I_aAD4xbx2L_DUlC6mp_WOJ8buASDxbg3_9MMTyKTro',
+                   ticker: 'ARCONFT97',
+                   name: 'ArCoNFT-01 Edition 97',
+                   type: 'art',
+                   lister: {
+                       "username": "t8",
+                       "name": "Tate Berenbaum",
+                       "addresses": [
+                           "pvPWBZ8A5HLpGSEfhEmK1A3PfMgB_an8vVS6L14Hsls"
+                       ],
+                       "bio": "Founder of Verto",
+                       "links": {
+                           "twitter": "TateBerenbaum",
+                           "github": "t8"
+                       },
+                       "image": "UGu1pI3ObS3wzdQ_GZwOr0DoWShTj4EPFgyHfDaHFgI"
+                   }
+               }
+           ]);
+       expect(tokens.hasNextPage()).toBeTruthy();
+       expect(tokens.isEmpty()).toBeFalsy();
+       expect((await tokens.nextPage()).items).toEqual([
+           {
+               "id": "PMakDnBkOM538HrpL4mgx66cau__-LqN-yWYEyfbQVo",
+               "ticker": "ARCONFT99",
+               "name": "ArCoNFT-01 Edition 99",
+               "type": "art",
+               "lister": {
+                   "username": "t8",
+                   "name": "Tate Berenbaum",
+                   "addresses": [
+                       "pvPWBZ8A5HLpGSEfhEmK1A3PfMgB_an8vVS6L14Hsls"
+                   ],
+                   "bio": "Founder of Verto",
+                   "links": {
+                       "twitter": "TateBerenbaum",
+                       "github": "t8"
+                   },
+                   "image": "UGu1pI3ObS3wzdQ_GZwOr0DoWShTj4EPFgyHfDaHFgI"
+               }
+           },
+           {
+               "id": "U0zMScFjmVWwc-KRZbGNhUo5ZtkIq2fM6zTQT_6PtsI",
+               "ticker": "ARCONFT98",
+               "name": "ArCoNFT-01 Edition 98",
+               "type": "art",
+               "lister": {
+                   "username": "t8",
+                   "name": "Tate Berenbaum",
+                   "addresses": [
+                       "pvPWBZ8A5HLpGSEfhEmK1A3PfMgB_an8vVS6L14Hsls"
+                   ],
+                   "bio": "Founder of Verto",
+                   "links": {
+                       "twitter": "TateBerenbaum",
+                       "github": "t8"
+                   },
+                   "image": "UGu1pI3ObS3wzdQ_GZwOr0DoWShTj4EPFgyHfDaHFgI"
+               }
+           }
+       ]);
+    });
 });
 
 

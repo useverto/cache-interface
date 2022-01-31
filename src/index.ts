@@ -29,4 +29,5 @@ export * from './calls/fetch-top-communities';
 export * from './calls/fetch-communities-metadata';
 export * from './calls/fetch-artwork-metadata';
 export * from './calls/fetch-token-by-id';
+export * from './calls/fetch-paginated';
 export * from './hooks/cache-contract-hook';
