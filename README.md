@@ -588,3 +588,13 @@ assert(executeOrder === "ORDER_SENT");
 1. Execute `action` (if asynchronous, it will be awaited)
 2. Call Cache API to invoke caching of `contractId`
 3. if `refreshCommunityContract` is `true`, call Cache API to invoke caching of community contract
+
+## Pointing to different cache URLS
+
+```typescript
+import { CacheInterfaceConstants } from "verto-cache-interface";
+
+CacheInterfaceConstants.CACHE_API = "http://localhost";
+
+render();
+```
