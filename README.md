@@ -595,6 +595,8 @@ assert(executeOrder === "ORDER_SENT");
 import { CacheInterfaceConstants } from "verto-cache-interface";
 
 CacheInterfaceConstants.CACHE_API = "http://localhost";
+CacheInterfaceConstants.COMMUNITY_CONTRACT = "[id]";
+CacheInterfaceConstants.CONTRACT_CDN = "https://storage.googleapis.com/contracts";
 
 render();
 ```
