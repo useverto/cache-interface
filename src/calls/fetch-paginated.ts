@@ -4,8 +4,8 @@ import {CommunityPeople} from "verto-internals/interfaces/contracts";
 import {PaginatedToken} from "./types/token-metadata";
 import {PaginatedData} from "verto-internals/services/miscellaneous/models";
 
-export const fetchPaginated = async<T extends PaginatedToken | CommunityPeople>(type: "people" | "tokens", pageSize: number = 50, page: number = 1): Promise<PaginatedData<T>> => {
-    const data = (await cacheApiBaseRequest<PaginationResult>(`token/paginate?type=${type}&size=${pageSize}&page=${page}`))?.data;
+export const fetchPaginated = async<T extends PaginatedToken | CommunityPeople>(type: "people" | "tokens", pageSize: number = 50, page: number = 1, sort = false): Promise<PaginatedData<T>> => {
+    const data = (await cacheApiBaseRequest<PaginationResult>(`token/paginate?type=${type}&size=${pageSize}&page=${page}${sort ? '&sort=true' : ''}`))?.data;
     const paginationInfo = data?.paginationInfo || {
         page: 0,
         pageSize: 0,
@@ -20,7 +20,7 @@ export const fetchPaginated = async<T extends PaginatedToken | CommunityPeople>(
         items: results,
         hasNextPage: () => paginationInfo.maxPages >  paginationInfo.page,
         nextPage: () => {
-            return fetchPaginated(type, pageSize, page + 1)
+            return fetchPaginated(type, pageSize, page + 1, sort)
         },
         isEmpty: () => paginationInfo.found === 0,
         getPaginationInfo: () => paginationInfo

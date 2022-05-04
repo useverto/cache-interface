@@ -532,7 +532,7 @@ fetchTokenById("ABC", (filterData) => filterData.type === "community").then(
 ### Fetching Paginated Items (Tokens | People)
 
 **Signature**:  
-`fetchPaginated = async<T extends PaginatedToken | CommunityPeople>(type: "people" | "tokens", pageSize: number = 10, page: number = 1): Promise<PaginatedData<T>>`
+`fetchPaginated = async<T extends PaginatedToken | CommunityPeople>(type: "people" | "tokens", pageSize: number = 10, page: number = 1, sort: boolean = false): Promise<PaginatedData<T>>`
 
 **Usage**:
 
