@@ -30,5 +30,7 @@ export * from './calls/fetch-communities-metadata';
 export * from './calls/fetch-artwork-metadata';
 export * from './calls/fetch-token-by-id';
 export * from './calls/fetch-paginated';
+export * from './calls/fetch-price-history';
+export * from './calls/fetch-latest-price';
 export * from './hooks/cache-contract-hook';
 export * from './constants';

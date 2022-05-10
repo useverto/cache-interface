@@ -548,6 +548,40 @@ fetchPaginated<PaginatedToken>("tokens").then(async (result) => {
 });
 ```
 
+### Fetching price history
+**Signature**
+`fetchPriceHistory = async (pair: [string, string], desc?: boolean): Promise<Array<VwapModel>>`
+
+**Usage**
+
+```typescript
+import { fetchPriceHistory } from "verto-cache-interface"
+
+fetchPriceHistory(["A", "B"]).then((result) => {
+    result.forEach((vwap) => {
+        console.log(vwap.block);
+        console.log(vwap.vwap);
+        console.log(vwap.dominantToken);
+    });
+})
+```
+
+### Fetching latest price
+**Signature**
+`fetchLatestPrice = async (pair: [string, string]): Promise<VwapModel | undefined>`
+
+**Usage**
+
+```typescript
+import { fetchLatestPrice } from "verto-cache-interface"
+
+fetchLatestPrice(["A", "B"]).then((result) => {
+    console.log(vwap.block);
+    console.log(vwap.vwap);
+    console.log(vwap.dominantToken);
+})
+```
+
 ## Hooks
 
 Hooks are a way to invoke functions and then invoke certain behaviors inside the cache system.

@@ -9,4 +9,8 @@ export class CommonUtils {
     static buildValidityCdn(contractId: string): string {
         return `${CacheInterfaceConstants.CONTRACT_CDN}/${contractId}/${contractId}_validity.json`;
     }
+
+    static buildVwapCdn(pair: [string, string]): string {
+        return `${CacheInterfaceConstants.CONTRACT_CDN}/vwaps/${pair[0]}_${pair[1]}.json`;
+    }
 }
