@@ -17,7 +17,7 @@ export const fetchBalancesByUsername = async (username: string, tokenType?: stri
             const addresses = userMetadata.addresses || [];
 
             for (const address of addresses) {
-                const balancesInAddress = await fetchBalancesForAddress(address, tokenType);
+                const balancesInAddress = await fetchBalancesForAddress(address, tokenType, manual);
                 response = [
                     ...response,
                     ...balancesInAddress
