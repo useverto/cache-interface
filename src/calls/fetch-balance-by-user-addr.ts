@@ -16,7 +16,10 @@ export const fetchBalanceByUserAddress = async (contractId: string, userAddress:
     if(stateKeys.length <= 0) {
         return undefined;
     }
-    
+
+    console.warn(`fetchBalanceByUserAddress does not return 'username'`);
+
+    // @ts-ignore
     return {
         name: contractMetadata.name,
         ticker: contractMetadata.ticker,

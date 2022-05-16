@@ -5,5 +5,6 @@ export interface UserBalance {
     balance: number;
     contractId: string;
     userAddress: string;
+    username: string;
     type?: string;
 }
